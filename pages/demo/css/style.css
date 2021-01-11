@@ -10,20 +10,28 @@
     --text-vertical-offset-multiplier: 0;
     --font-size: 50px;
     --font-hover-multiplier: 1.5;
+
+    --music-button-size: 40px;
 }
 
 body {
     margin: 0;
+    color: white;
+    font-family: "Poppins", "Times New Roman", sans-serif;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     
-    background-color: lightslategray;
-    color: white;
-    user-select: none;
-	font-family: "Poppins", "Times New Roman", sans-serif;
-    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    /* background-color: lightslategray; */
+
+    background-image: linear-gradient(90deg, #FC5C7D, #6A82FB);
+    /* background-image: linear-gradient(90deg, #FC466B, #3F5EFB); */
 }
 
 h1 {
@@ -139,3 +147,30 @@ h1 {
     background: radial-gradient(circle at bottom right, red, crimson);
     border-top-left-radius: var(--border-radius);
 }
+
+/* ! */
+
+.music-container .buttons {
+    position: absolute;
+    left: 50vw;
+    margin-top: 50px;
+    transform: translateX(-50%);
+}
+
+.music-btn {
+    width: var(--music-button-size);
+    height: var(--music-button-size);
+    font-size: 25px;
+
+    text-align: center;
+	cursor: pointer;
+}
+
+/* .music-container canvas {
+    position: absolute;
+    left: 50vw;
+    transform: translateX(-50%);
+    background: black;
+    margin-top: 200px;
+} */
+
