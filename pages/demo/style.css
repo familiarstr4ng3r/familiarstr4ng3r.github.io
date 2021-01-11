@@ -1,0 +1,92 @@
+:root {
+    --size: 100px;
+    --border-radius: 100%;
+    --hover-percentage: 1.5;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+    background-color: lightslategray;
+    color: white;
+    user-select: none;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 7vw;
+}
+
+.title {
+    opacity: 0;
+    /* transition: opacity 0.5s; */
+}
+
+.title.active {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.btn {
+    width: var(--size);
+    height: var(--size);
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: width 0.5s,
+                height 0.5s,
+                box-shadow 0.5s;
+}
+
+.btn .text {
+    font-size: 50px;
+}
+
+.btn:hover {
+    width: calc(var(--size) * var(--hover-percentage));
+    height: calc(var(--size) * var(--hover-percentage));
+    box-shadow: 0 0 0 20px lightsteelblue;
+}
+
+.btn.topLeft {
+    top: 0;
+    left: 0;
+
+    background: radial-gradient(circle at top left, purple, blueviolet);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.btn.topRight {
+    top: 0;
+    /* left: calc(100vw - var(--size)); */
+    right: 0;
+
+    background: radial-gradient(circle at top right, darkgreen, green);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.btn.bottomLeft {
+    /* top: calc(100vh - var(--size)); */
+    bottom: 0;
+    left: 0;
+
+    background: radial-gradient(circle at bottom left, blue, lightseagreen);
+    border-top-right-radius: var(--border-radius);
+}
+
+.btn.bottomRight {
+    /* top: calc(100vh - var(--size));
+    left: calc(100vw - var(--size)); */
+    bottom: 0;
+    right: 0;
+
+    background: radial-gradient(circle at bottom right, red, crimson);
+    border-top-left-radius: var(--border-radius);
+}
