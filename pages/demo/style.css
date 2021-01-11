@@ -1,7 +1,15 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 :root {
     --size: 100px;
     --border-radius: 100%;
-    --hover-percentage: 1.5;
+    --hover-size-multiplier: 1.5;
+    --text-offset: 20px;
+    --text-vertical-offset-multiplier: 0;
+    --font-size: 50px;
+    --font-hover-multiplier: 1.5;
 }
 
 body {
@@ -14,21 +22,23 @@ body {
     background-color: lightslategray;
     color: white;
     user-select: none;
+	font-family: "Poppins", "Times New Roman", sans-serif;
     text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
-    font-size: 7vw;
+    font-size: 5vw;
 }
 
 .title {
     opacity: 0;
-    /* transition: opacity 0.5s; */
+    transition: opacity 0.5s;
 }
 
 .title.active {
     opacity: 1;
-    transition: opacity 0.5s;
+    /* ! instant zero opacity */
+    /* transition: opacity 0.5s; */
 }
 
 .btn {
@@ -36,24 +46,63 @@ h1 {
     height: var(--size);
     position: absolute;
 
-    display: flex;
+    /* ! instead of ".btn.side .text" */
+
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
 
     transition: width 0.5s,
                 height 0.5s,
                 box-shadow 0.5s;
 }
 
-.btn .text {
-    font-size: 50px;
-}
-
 .btn:hover {
-    width: calc(var(--size) * var(--hover-percentage));
-    height: calc(var(--size) * var(--hover-percentage));
+    width: calc(var(--size) * var(--hover-size-multiplier));
+    height: calc(var(--size) * var(--hover-size-multiplier));
     box-shadow: 0 0 0 20px lightsteelblue;
 }
+
+.btn .text {
+    font-size: var(--font-size);
+    transition: font-size 0.5s;
+}
+
+.btn:hover .text {
+    font-size: calc(var(--font-size) * var(--font-hover-multiplier));
+}
+
+/* ! */
+
+.btn.topLeft .text {
+    position: absolute;
+    /* top: calc(var(--text-offset) * var(--text-vertical-offset-multiplier)); */
+    top: 0;
+    left: var(--text-offset);
+}
+
+.btn.topRight .text {
+    position: absolute;
+    /* top: calc(var(--text-offset) * var(--text-vertical-offset-multiplier)); */
+    top: 0;
+    right: var(--text-offset);
+}
+
+.btn.bottomLeft .text {
+    position: absolute;
+    /* bottom: calc(var(--text-offset) * var(--text-vertical-offset-multiplier)); */
+    bottom: 0;
+    left: var(--text-offset);
+}
+
+.btn.bottomRight .text {
+    position: absolute;
+    /* bottom: calc(var(--text-offset) * var(--text-vertical-offset-multiplier)); */
+    bottom: 0;
+    right: var(--text-offset);
+}
+
+/* ! */
 
 .btn.topLeft {
     top: 0;
