@@ -93,7 +93,7 @@ function csvToJson(csvText) {
     {
       const row = lines[k].split(separator);
       const key = row[0];
-      const value = row[i];
+      const value = row[i + 1]; // fixed
 
       dict[key] = value;
     }
