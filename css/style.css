@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+  --gradient-one: linear-gradient(180deg, #8e2de2, #4a00e0);
+  --gradient-two: linear-gradient(180deg, #00bf8f, #001510);
+  --underline-height: 2px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Poppins, Arial, sans-serif;
+  user-select: none;
+
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#content {
+  background-image: var(--gradient-two);
+
+  border-radius: 50px;
+  list-style-type: none;
+
+  width: 400px;
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#content > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#content > li > a {
+  text-decoration: none;
+  color: white;
+  font-size: larger;
+}
+
+#content > li:hover > div {
+  width: 100%;
+}
+
+#content > li > div {
+  background-color: white;
+  height: var(--underline-height);
+  border-radius: calc(var(--underline-height) * 0.5);
+
+  width: 0%;
+
+  transition: width 0.5s ease-in-out;
+}
