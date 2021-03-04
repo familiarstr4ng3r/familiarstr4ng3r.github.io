@@ -1,0 +1,2 @@
+https://github.com/z3ut/mouse-wheel-zoom/
+https://github.com/jackmoore/wheelzoom

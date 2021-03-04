@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Demo</title>
+  <script src="js/svg-handler.js" defer></script>
+  <style>
+    body {
+      user-select: none;
+    }
+
+    svg > g {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- https://editor.method.ac/ -->
+  
+  <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <!-- <rect id="svg_1" height="43" width="59" y="152" x="72" opacity="undefined" stroke="#ff0000" fill="#000"/>
+    <rect id="svg_2" height="71" width="118" y="214" x="209" opacity="undefined" stroke="#000" fill="#fff"/> -->
+    <g transform="translate(200, 200)">
+      <rect id="svg_6" height="100" width="200" y="0" x="0" fill="blue" stroke="black" stroke-width="1"/>
+      <text text-anchor="middle" font-family="sans-serif" font-size="30" id="svg_7" y="50" x="100" stroke-width="0" stroke="black" fill="black" alignment-baseline="middle">200, 200</text>
+    </g>
+    <g transform="translate(500, 200)">
+      <rect id="svg_8" height="100" width="200" y="0" x="0" fill="yellow" stroke="black" stroke-width="0"/>
+      <text text-anchor="middle" font-family="sans-serif" font-size="30" id="svg_9" y="50" x="100" stroke-width="0" stroke="black" fill="black" alignment-baseline="middle">500, 200</text>
+    </g>
+    <!-- <g transform="translate(300, 400)">
+      <rect id="svg_10" height="100" width="200" y="0" x="0" stroke="black" fill="white"/>
+      <svg width="200" height="100">
+        <text text-anchor="middle" font-family="sans-serif" font-size="30" id="svg_11" y="50%" x="50%" stroke-width="0" stroke="black" fill="black" alignment-baseline="middle">300, 400</text>
+      </svg>
+    </g> -->
+   </svg>
+</body>
+</html>
