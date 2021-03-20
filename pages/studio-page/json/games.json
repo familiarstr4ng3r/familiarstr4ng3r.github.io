@@ -1,0 +1,17 @@
+[
+  {
+    "param": "monster-tower",
+    "name": "Monster Tower",
+    "links": {
+      "android": "https://play.google.com/store/apps/details?id=com.VERS.GreenPanic",
+      "ios": "https://apps.apple.com/ru/app/monster-tower-orc/id1539011088"
+    }
+  },{
+    "param": "galaxy-runner",
+    "name": "Galaxy Runner",
+    "links": {
+      "android": "https://play.google.com/store/apps/details?id=com.VERS.GalaxyRunner",
+      "ios": "https://apps.apple.com/ru/app/galaxy-runner-adventure/id1557506258"
+    }
+  }
+]
