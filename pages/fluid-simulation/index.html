@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluid Simulation</title>
+  <style>
+    /* html, body {
+      overflow: hidden;
+      color: #fefeff;
+    } */
+    body {
+      margin: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;" unselectable="on" onselectstart="return false;">
+  <canvas width="800" height="600"></canvas>
+  <script src="index.js"></script>
+</body>
+</html>
