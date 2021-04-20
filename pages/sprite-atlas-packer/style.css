@@ -2,16 +2,20 @@
 :root {
   --frame-width: 200px;
   --frame-height: 200px;
-  --grid-x: 3;
+  --grid-x: 2;
   --grid-y: 2;
+  --pivot-x: 0.5;
+  --pivot-y: 0.5;
+  
   --border-size: 1px;
-
   --circle-size: 30px;
+  --circle-font-size: 20px;
   --pivot-circle-size: 10px;
 }
 
 body {
   user-select: none;
+  font-family: "Consolas", "Times New Roman", monospace;
 }
 
 /* ! dropzone */
@@ -30,12 +34,18 @@ body {
   border-radius: 10px;
   padding: 25px;
   text-align: center;
-  font-family: "Consolas", "Times New Roman", monospace;
   color: gray;
 }
 
 #drop-zone:hover {
   cursor: pointer;
+}
+
+/* ! settings */
+
+.settings-container {
+  padding: 10px;
+  border: 1px solid gray;
 }
 
 /* ! atlas */
@@ -59,6 +69,7 @@ body {
   justify-content: center;
   grid-template-columns: repeat(var(--grid-x), 1fr);
   grid-template-rows: repeat(var(--grid-y), 1fr);
+  pointer-events: none;
 }
 
 .grid.visible .frame {
@@ -88,7 +99,7 @@ body {
 
   display: block;
   color: white;
-  font-size: 20px;
+  font-size: var(--circle-font-size);
 }
 
 .grid .frame .circle span {
@@ -97,8 +108,8 @@ body {
 
 .grid.visible .frame .pivot {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: calc(var(--pivot-x) * 100%);
+  top: calc(var(--pivot-y) * 100%);
   transform: translate(-50%, -50%);
 
   width: var(--pivot-circle-size);
