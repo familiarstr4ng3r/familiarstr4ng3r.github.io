@@ -1,0 +1,108 @@
+
+:root {
+  --frame-width: 200px;
+  --frame-height: 200px;
+  --grid-x: 3;
+  --grid-y: 2;
+  --border-size: 1px;
+
+  --circle-size: 30px;
+  --pivot-circle-size: 10px;
+}
+
+body {
+  user-select: none;
+}
+
+/* ! dropzone */
+
+#input-file {
+  display: none;
+}
+
+.file-container {
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+#drop-zone {
+  border: 2px dashed gray;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  font-family: "Consolas", "Times New Roman", monospace;
+  color: gray;
+}
+
+#drop-zone:hover {
+  cursor: pointer;
+}
+
+/* ! atlas */
+
+.atlas-container {
+  width: calc(var(--frame-width) * var(--grid-x));
+  height: calc(var(--frame-height) * var(--grid-y));
+  background-color: gray;
+
+  position: relative;
+}
+
+.atlas-container > img {
+  position: absolute;
+  width: calc(var(--frame-width) * var(--grid-x));
+  height: calc(var(--frame-height) * var(--grid-y));
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(var(--grid-x), 1fr);
+  grid-template-rows: repeat(var(--grid-y), 1fr);
+}
+
+.grid.visible .frame {
+  width: var(--frame-width);
+  height: var(--frame-height);
+  box-sizing: border-box;
+  border: var(--border-size) dashed black;
+  border-radius: 10px;
+
+  position: relative;
+}
+
+.grid.visible .frame .circle {
+  position: relative;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  background-color: darkslategray;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.grid.visible .frame .circle span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  display: block;
+  color: white;
+  font-size: 20px;
+}
+
+.grid .frame .circle span {
+  display: none;
+}
+
+.grid.visible .frame .pivot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: var(--pivot-circle-size);
+  height: var(--pivot-circle-size);
+  border-radius: 50%;
+  background-color: red;
+}

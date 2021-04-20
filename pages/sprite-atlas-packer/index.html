@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/jimp@0.16.0/browser/lib/jimp.js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <input type="file" id="input-file" accept="image/*" multiple>
+
+  <div class="file-container">
+    <div id="drop-zone">Drop file(s) or click here!</div>
+    <ul id="file-list">
+      <li>1</li>
+      <li>2</li>
+    </ul>
+    <button id="btn-clear">Clear!</button>
+  </div>
+
+  <div class="setting-container">
+    <div>
+      <span>Grid X</span>
+      <input type="number" id="input-grid-x" value="4">
+    </div>
+    <div>
+      <span>Grid Y</span>
+      <input type="number" id="input-grid-y" value="4">
+    </div>
+  </div>
+
+  <div class="atlas-container">
+    <img src="images/placeholder.png" id="img-result" alt="atlas">
+
+    <div class="grid visible" id="grid-content">
+      <div class="frame">
+        <div class="circle">
+          <span>1</span>
+        </div>
+        <div class="pivot"></div>
+      </div>
+      <div class="frame">
+        <div class="circle">
+          <span>2</span>
+        </div>
+        <div class="pivot"></div>
+      </div>
+      <div class="frame">
+        <div class="circle">
+          <span>3</span>
+        </div>
+        <div class="pivot"></div>
+      </div>
+      <div class="frame">
+        <div class="circle">
+          <span>4</span>
+        </div>
+        <div class="pivot"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
