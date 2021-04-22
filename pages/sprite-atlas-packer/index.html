@@ -22,19 +22,40 @@
   </div>
 
   <div class="settings-container">
-    <div>
-      <span>Grid X</span>
-      <input type="number" id="input-grid-x" value="4">
+    
+    <div class="settings-grid">
+      <div>
+        <span>Grid X</span>
+        <input type="number" id="input-grid-x" value="4">
+      </div>
+      <div>
+        <span>Grid Y</span>
+        <input type="number" id="input-grid-y" value="4">
+      </div>
     </div>
-    <div>
-      <span>Grid Y</span>
-      <input type="number" id="input-grid-y" value="4">
+
+    <div class="settings-pivot">
+      <div>
+        <span>Pivot X</span>
+        <input type="number" id="input-pivot-x" value="0.5" step="0.5" min="0" max="1">
+      </div>
+      <div>
+        <span>Pivot Y</span>
+        <input type="number" id="input-pivot-y" value="0.5" step="0.5" min="0" max="1">
+      </div>
     </div>
+
     <div>
       <span>Show Grid</span>
       <input type="checkbox" id="checkbox-grid" checked>
     </div>
-    <button id="btn-create">Create!</button>
+
+    <div>
+      <button id="btn-pack-grid">Pack grid</button>
+      <button id="btn-pack-horizontal">Pack horizontal</button>
+      <button id="btn-pack-vertical">Pack vertical</button>
+    </div>
+    
   </div>
 
   <div class="atlas-container">
