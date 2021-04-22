@@ -16,6 +16,8 @@ const style = document.querySelector(":root").style;
 const gridContent = document.querySelector("#grid-content");
 const gridCheckbox = document.querySelector("#checkbox-grid");
 
+let packer = null;
+
 const loadedFiles = [];
 
 clearChildrens(fileList);
@@ -26,17 +28,49 @@ btnClear.addEventListener("click", event => {
 });
 
 btnPackGrid.addEventListener("click", event => {
-  if (loadedFiles.length == 0) {
-    alert("Please load files!");
-    return;
-  }
-  onClickCreateAtlas();
+  if (alertAction()) return;
+
+  loadImages().then(images => {
+    packer = new AtlasPacker(images);
+    const { grid, pivot } = getOptions();  
+    packer.createGrid(grid, pivot).then(value => onImageCreated(value));
+  });
+});
+
+btnPackHorizontal.addEventListener("click", event => {
+  if (alertAction()) return;
+
+  loadImages().then(images => {
+    packer = new AtlasPacker(images);
+    const { grid, pivot } = getOptions();
+    packer.createHorizontal(pivot).then(value => onImageCreated(value));
+  });
+});
+
+btnPackVertical.addEventListener("click", event => {
+  if (alertAction()) return;
+
+  loadImages().then(images => {
+    packer = new AtlasPacker(images);
+    const { grid, pivot } = getOptions();
+    packer.createVertical(pivot).then(value => onImageCreated(value));
+  });
 });
 
 gridCheckbox.addEventListener("change", event => {
   const value = gridCheckbox.checked;
   gridContent.className = value ? "grid visible" : "grid";
 });
+
+// !
+
+function alertAction() {
+  if (loadedFiles.length == 0) {
+    alert("Please load files!");
+    return true;
+  }
+  return false;
+}
 
 function clearChildrens(element) {
   while (element.firstElementChild) element.firstElementChild.remove();
@@ -51,11 +85,13 @@ function addFiles(fileArray) {
   });
 }
 
-function onClickCreateAtlas() {
-  const promises = loadedFiles.map(file => getImage(file));
-  Promise.all(promises).then(buffers => {
-    const jimps = buffers.map(buffer => Jimp.read(buffer));
-    Promise.all(jimps).then(images => handleImages(images));
+function loadImages() {
+  return new Promise((resolve, reject) => {
+    const promises = loadedFiles.map(file => getImage(file));
+    Promise.all(promises).then(buffers => {
+      const jimps = buffers.map(buffer => Jimp.read(buffer));
+      Promise.all(jimps).then(images => resolve(images));
+    });
   });
 }
 
@@ -69,72 +105,23 @@ function getImage(file) {
   });
 };
 
-function handleImages(images) {
+function getOptions() {
   const grid = {
     x: +inputGridX.value,
     y: +inputGridY.value
   }
-  const pivot = { 
+  const pivot = {
     x: +inputPivotX.value, 
     y: +inputPivotY.value
   };
   pivot.y = 1 - pivot.y;
 
-  const nextPow2 = (value) => {
-    const e = Math.ceil(Math.log(value) / Math.log(2));
-    return Math.pow(2, e); 
-  }
-
-  const { width, height } = images[0].bitmap;
-  const frame = {
-    width: nextPow2(width) * 1,
-    height: nextPow2(height) * 1
-  };
-  console.log(frame);
-  
-  const w = frame.width * grid.x;
-  const h = frame.height * grid.y;
-
-  new Jimp(w, h, (err, image) => {
-      
-    if (err) throw err;
-    // image.opacity(0);
-
-    const options = { grid, frame, pivot };
-    createAtlas(options, image, images);
-
-    image.getBase64(Jimp.MIME_PNG, (err, src) => {
-      document.querySelector("#img-result").src = src;
-      applyStyle(options);
-    });
-  });
+  return { grid, pivot };
 }
 
-function getOffset(image, frame, pivot) {
-  const { width, height } = image.bitmap;
-  const offset = {
-    x: (frame.width - width) * pivot.x,
-    y: (frame.height - height) * pivot.y
-  };
-  return offset;
-}
-
-function createAtlas(options, background, images) {
-  const { grid, frame, pivot } = options;
-  
-  for (let y = 0; y < grid.y; y++) {
-    for (let x = 0; x < grid.x; x++) {
-      const index = y * grid.x + x;
-      const img = images[index];
-      if (!img) break;
-      const offset = getOffset(img, frame, pivot);
-      const position = {
-        x: x * frame.width + offset.x,
-        y: y * frame.height + offset.y
-      }
-      background.composite(img, position.x, position.y);
-    }
-  }
+function onImageCreated(value) {
+  document.querySelector("#img-result").src = value;
+  applyStyle(packer.options);
 }
 
 function applyStyle(options) {
