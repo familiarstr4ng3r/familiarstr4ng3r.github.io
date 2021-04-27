@@ -11,12 +11,22 @@ class AtlasPacker {
       return Math.pow(2, e); 
     }
     
-    // TODO: calculate max size if images has different w/h
+    // calculating max size of one frame if images has different w/h
+
+    const w = Array.from(this.images).sort((a, b) => {
+      return b.bitmap.width - a.bitmap.width;
+    })[0].bitmap.width;
+    const h = Array.from(this.images).sort((a, b) => {
+      return b.bitmap.height - a.bitmap.height;
+    })[0].bitmap.height;
+
+    //console.log(w, h);
+
     const temp = 1;
-    const { width, height } = this.images[0].bitmap;
+    // const { width, height } = this.images[0].bitmap;
     const frame = {
-      width: nextPow2(width) * temp,
-      height: nextPow2(height) * temp
+      width: nextPow2(w) * temp,
+      height: nextPow2(h) * temp
     };
     return frame;
   }
