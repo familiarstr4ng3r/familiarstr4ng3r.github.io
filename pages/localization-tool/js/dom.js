@@ -1,13 +1,3 @@
-const CONTENT = [
-  {
-    display_name: "Galaxy Runner",
-    id: "1liqJ34DsWhKAnYmGVYkRkbHYMZ_W8LOP_4p7QWm5-1s"
-  },
-  {
-    display_name: "TEST",
-    id: "146"
-  }
-]
 
 document.addEventListener("DOMContentLoaded", onLoad);
 
@@ -97,25 +87,13 @@ function onLoad() {
     if (success) {
       const files = Object.values(zip.files);
       files.forEach(f => addFile(zip, f));
-      updateStatus(true, "GOOD");
     }
-    else {
-      updateStatus(false, "ERROR BAD ID");
-    }
+
+    updateStatus(success);
   }
 
-  function saveContent(content, fileName) {
-    // ! https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
-
-    const a = document.createElement("a");
-    const file = new Blob([content], {type: "text/plain"});
-      
-    a.href = URL.createObjectURL(file);
-    a.download = fileName;
-    a.click();
-  }
-
-  function updateStatus(success, message) {
+  function updateStatus(success) {
+    const message = success ? "Good!" : "Fetch error";
     const classList = ["alert"];
     classList.push(success ? "alert-success" : "alert-danger");
     userAlert.className = classList.join(" ");

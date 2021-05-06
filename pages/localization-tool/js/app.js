@@ -1,19 +1,43 @@
 
 
-const zipLink = "https://docs.google.com/spreadsheets/export?format=zip&id="
-
 // http://localhost:5500/?game=galaxyrunner&output=json
 
-
-// TODO:
-// const urlParams = new URLSearchParams(window.location.search);
-
-// console.log(urlParams.has("game"), urlParams.get("game"));
-// console.log(urlParams.has("output"), urlParams.get("output"));
-
-// showSaveFilePicker()
-
+const zipLink = "https://docs.google.com/spreadsheets/export?format=zip&id="
 const IGNORE_SYMBOL = "#";
+
+handleUrl();
+
+async function handleUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const allowed = urlParams.has("game");
+
+  if (!allowed) return;
+
+  const game = urlParams.get("game");
+
+  const entry = CONTENT.find(value => value.url_param === game);
+  if (!entry) return;
+
+  const [success, zip] = await downloadZip(entry.id);
+  if (!success) return;
+
+  const files = Object.values(zip.files);
+  files.forEach(file => {
+    if (file.name.endsWith(".html")) {
+      zip.file(file.name).async("string")
+        .then(content => handleContent(content))
+        .then(result => {
+          const csv = getCSV(result);
+          const json = csvToJson(csv);
+
+          if (confirm(`Download localization file for ${entry.display_name}`)) {
+            const fileName = new Date().toISOString().replaceAll(":", "-") + ".json";
+            saveContent(json, fileName);
+          }
+        });
+    }
+  });
+}
 
 async function downloadZip(id) {
   const url = `${zipLink}${id}`;
@@ -77,7 +101,8 @@ function csvToJson(csvText) {
   const separator = csvText[0];
   const lines = csvText.split("\n");
 
-  const languages = lines[0].split(separator).filter(e => !e.startsWith(IGNORE_SYMBOL) && e);
+  const languages = lines[0].split(separator)
+    .filter(value => value.trim().length > 0);
 
   const localization = {};
 
@@ -86,6 +111,9 @@ function csvToJson(csvText) {
 
   for (i = 0; i < languages.length; i++)
   {
+    const lang = languages[i];
+    if (lang.startsWith(IGNORE_SYMBOL)) continue;
+
     const dict = {};
     
     // ! k-index starts from 1 because of 1st line contains languages 
@@ -98,10 +126,11 @@ function csvToJson(csvText) {
       dict[key] = value;
     }
 
-    const lang = languages[i];
     localization[lang] = dict;
   }
 
-  return JSON.stringify(localization, null, "    ");
+  const output = JSON.stringify(localization, null, " ".repeat(4));
+
+  return output;
 }
 
